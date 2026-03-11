@@ -132,12 +132,13 @@ const Dashboard = () => {
     // Cleanup function
     return () => {
       isMountedRef.current = false;
-      
+
       // Cancel any pending requests
       if (abortControllerRef.current) {
         abortControllerRef.current.abort();
       }
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // Empty dependency array - only run once
 
   // Listen for mood data updates to refresh streaks

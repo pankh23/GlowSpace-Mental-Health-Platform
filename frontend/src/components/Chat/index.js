@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
-import { FaPaperPlane, FaSmile, FaSearch, FaEllipsisV, FaHeart, FaThumbsUp, FaLaugh } from 'react-icons/fa';
+import { FaPaperPlane, FaSmile, FaSearch } from 'react-icons/fa';
 import axios from 'axios';
 import io from 'socket.io-client';
 
@@ -16,7 +16,7 @@ const Chat = ({ roomId = 'general' }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [unreadCount, setUnreadCount] = useState(0);
+  const [, setUnreadCount] = useState(0);
   const [selectedMessage, setSelectedMessage] = useState(null);
   const [showActions, setShowActions] = useState(false);
   
@@ -87,6 +87,7 @@ const Chat = ({ roomId = 'general' }) => {
   useEffect(() => {
     loadMessages();
     getUnreadCount();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [roomId]);
 
   // Auto-scroll to bottom
@@ -99,6 +100,7 @@ const Chat = ({ roomId = 'general' }) => {
     if (user && roomId) {
       markMessagesAsRead();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [roomId, user]);
 
   const scrollToBottom = () => {

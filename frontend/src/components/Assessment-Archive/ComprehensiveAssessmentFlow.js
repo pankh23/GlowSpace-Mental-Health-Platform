@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import { assessmentAPI } from '../../services/api';
 import './ComprehensiveAssessmentFlow.css';
@@ -11,7 +11,7 @@ const ComprehensiveAssessmentFlow = ({ onComplete, onBack, error }) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [responses, setResponses] = useState({});
   const [loading, setLoading] = useState(false);
-  const { apiRequest } = useAuth();
+  useAuth();
 
   // Section selection handler
   const handleSectionSelection = (sectionKey) => {
@@ -369,9 +369,7 @@ const ComprehensiveAssessmentFlow = ({ onComplete, onBack, error }) => {
     
     if (!currentQuestion || !currentSectionInfo) return null;
 
-    const totalQuestions = currentSectionInfo.questions.length;
     const currentSectionIndex = selectedSections.indexOf(currentSection);
-    const totalSections = selectedSections.length;
     const questionsInPreviousSections = selectedSections
       .slice(0, currentSectionIndex)
       .reduce((sum, sectionKey) => sum + assessmentData.sections[sectionKey].questions.length, 0);
@@ -380,7 +378,6 @@ const ComprehensiveAssessmentFlow = ({ onComplete, onBack, error }) => {
     const totalOverallQuestions = selectedSections.reduce((sum, sectionKey) => 
       sum + assessmentData.sections[sectionKey].questions.length, 0);
     
-    const progressPercentage = (overallQuestionNumber / totalOverallQuestions) * 100;
     const canProceed = currentQuestion.required ? 
       (responses[currentQuestion.id] !== undefined && responses[currentQuestion.id] !== '') :
       true; // Optional questions can always proceed

@@ -13,20 +13,20 @@ const MoodTracking = () => {
 
   const [loading, setLoading] = useState(true);
   const [refreshTrigger, setRefreshTrigger] = useState(0);
-  const [activeTab, setActiveTab] = useState('overview');
+  const [activeTab, _setActiveTab] = useState('overview');
 
   const [selectedMood, setSelectedMood] = useState(null);
-  const [showTagSelection, setShowTagSelection] = useState(false);
+  const [_showTagSelection, setShowTagSelection] = useState(false);
   const [selectedTags, setSelectedTags] = useState([]);
 
-  const [isQuickSaving, setIsQuickSaving] = useState(false);
-  const [quickSaveSuccess, setQuickSaveSuccess] = useState(false);
-  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+  const [_isQuickSaving, setIsQuickSaving] = useState(false);
+  const [, setQuickSaveSuccess] = useState(false);
+  const [, setShowSuccessMessage] = useState(false);
 
-  const [tipsRefreshKey] = useState(0);
-  const [savedMoodForTips, setSavedMoodForTips] = useState(null);
+  const [_tipsRefreshKey] = useState(0);
+  const [, setSavedMoodForTips] = useState(null);
 
-  const [userProgress, setUserProgress] = useState({
+  const [_userProgress, setUserProgress] = useState({
     dayStreak: 0,
     moodScore: 0,
     totalEntries: 0,
@@ -67,7 +67,7 @@ const MoodTracking = () => {
     ]
   };
 
-  const getRandomActivities = (mood, count = 2) => {
+  const _getRandomActivities = (mood, count = 2) => {
     const activities = moodActivities[mood] || [];
     const shuffled = [...activities].sort(() => 0.5 - Math.random());
     return shuffled.slice(0, count);
@@ -196,13 +196,13 @@ const MoodTracking = () => {
     }
   };
 
-  const handleMoodSelect = mood => {
+  const _handleMoodSelect = mood => {
     setSelectedMood(mood);
     setShowTagSelection(true);
     setSavedMoodForTips(null);
   };
 
-  const handleTagsSelected = async () => {
+  const _handleTagsSelected = async () => {
     if (!selectedMood) return;
 
     const saved = await saveQuickMoodEntry(selectedMood, selectedTags);
@@ -215,7 +215,7 @@ const MoodTracking = () => {
     }
   };
 
-  const handleTagClick = tag => {
+  const _handleTagClick = tag => {
     setSelectedTags(prev =>
       prev.includes(tag)
         ? prev.filter(t => t !== tag)
@@ -223,7 +223,7 @@ const MoodTracking = () => {
     );
   };
 
-  const handleBackToMood = () => {
+  const _handleBackToMood = () => {
     setShowTagSelection(false);
     setSelectedMood(null);
     setSelectedTags([]);

@@ -6,7 +6,7 @@ import './AssessmentHub.css';
 const AssessmentHub = ({ onStartAssessment, onViewHistory, error }) => {
   const [assessmentTypes, setAssessmentTypes] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { token } = useAuth();
+  useAuth();
 
   const fetchAssessmentTypes = useCallback(async () => {
     try {

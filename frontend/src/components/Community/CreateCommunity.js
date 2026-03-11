@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { FaTimes, FaUsers, FaTag, FaCog, FaEye, FaEyeSlash, FaShieldAlt } from 'react-icons/fa';
+import { FaTimes, FaUsers, FaTag, FaEye } from 'react-icons/fa';
 import { useAuth } from '../../contexts/AuthContext';
 import { communityAPI } from '../../services/api';
 import './CreateCommunity.css';
 
 const CreateCommunity = ({ onCommunityCreated, onClose }) => {
-  const { user } = useAuth();
+  useAuth();
   const [formData, setFormData] = useState({
     name: '',
     description: '',
@@ -131,7 +131,7 @@ const CreateCommunity = ({ onCommunityCreated, onClose }) => {
     return icons[category] || '🏷️';
   };
 
-  const getTypeIcon = (type) => {
+  const _getTypeIcon = () => {
     return <FaEye />;
   };
 

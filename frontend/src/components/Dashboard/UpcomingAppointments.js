@@ -7,7 +7,7 @@ const UpcomingAppointments = () => {
   const [appointments, setAppointments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const { apiRequest } = useAuth();
+  useAuth();
   
   // Refs for cleanup and preventing multiple calls
   const abortControllerRef = useRef(null);

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { FaArrowLeft, FaPaperPlane, FaSmile, FaSearch, FaEllipsisV, FaHeart, FaThumbsUp, FaLaugh, FaPin, FaEdit, FaTrash, FaSignOutAlt, FaUsers, FaCog, FaInfoCircle, FaDownload, FaShare } from 'react-icons/fa';
+import { FaArrowLeft, FaPaperPlane, FaSmile, FaSearch, FaEllipsisV, FaEdit, FaTrash, FaSignOutAlt, FaUsers, FaCog, FaInfoCircle, FaDownload, FaShare } from 'react-icons/fa';
 import { useAuth } from '../../contexts/AuthContext';
 import { communityAPI } from '../../services/api';
 import './CommunityChat.css';
@@ -12,10 +12,10 @@ const CommunityChat = ({ communityId, onBackToList, onCommunityLeft, onCommunity
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isTyping, setIsTyping] = useState(false);
-  const [typingUsers, setTypingUsers] = useState([]);
+  const [typingUsers] = useState([]);
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
-  const [selectedMessage, setSelectedMessage] = useState(null);
-  const [showMessageActions, setShowMessageActions] = useState(false);
+  const [, setSelectedMessage] = useState(null);
+  const [, setShowMessageActions] = useState(false);
   const [editingMessage, setEditingMessage] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [showSearch, setShowSearch] = useState(false);
@@ -39,6 +39,7 @@ const CommunityChat = ({ communityId, onBackToList, onCommunityLeft, onCommunity
   useEffect(() => {
     loadCommunity();
     loadMessages();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [communityId]);
 
   useEffect(() => {

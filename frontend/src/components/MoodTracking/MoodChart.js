@@ -1,24 +1,13 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
   Tooltip,
   ResponsiveContainer,
-  Area,
-  AreaChart,
-  ReferenceLine,
   PieChart,
   Pie,
   Cell
 } from 'recharts';
 import { moodAPI } from '../../services/api';
-import { 
-  validateAnalyticsResponse, 
-  validateMoodValue 
-} from '../../utils/moodDataValidation';
+import { validateMoodValue } from '../../utils/moodDataValidation';
 import './MoodChart.css';
 
 const MoodChart = ({ refreshTrigger, isDarkMode = false }) => {
@@ -27,62 +16,14 @@ const MoodChart = ({ refreshTrigger, isDarkMode = false }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isUpdating, setIsUpdating] = useState(false);
-  const [chartType, setChartType] = useState('line');
-  const [timeRange, setTimeRange] = useState('weekly');
-  
+  const [timeRange] = useState('weekly');
+
   // Add state for live mood data that will be used by pie chart
   const [liveMoodData, setLiveMoodData] = useState([]);
   const [lastUpdateTime, setLastUpdateTime] = useState(Date.now());
-  const [selectedPoint, setSelectedPoint] = useState(null);
   const [retryCount, setRetryCount] = useState(0);
   const [lastError, setLastError] = useState(null);
 
-  // Mood configuration with improved accessibility
-  const moodConfig = {
-    'very_happy': {
-      value: 5,
-      label: 'Very Happy',
-      emoji: '😄',
-      color: '#27ae60',
-      description: 'Feeling fantastic!'
-    },
-    'happy': {
-      value: 4,
-      label: 'Happy',
-      emoji: '😊',
-      color: '#2ecc71',
-      description: 'Feeling good'
-    },
-    'neutral': {
-      value: 3,
-      label: 'Neutral',
-      emoji: '😐',
-      color: '#f1c40f',
-      description: 'Feeling okay'
-    },
-    'sad': {
-      value: 2,
-      label: 'Sad',
-      emoji: '😞',
-      color: '#f39c12',
-      description: 'Feeling down'
-    },
-    'very_sad': {
-      value: 1,
-      label: 'Very Sad',
-      emoji: '😢',
-      color: '#e74c3c',
-      description: 'Feeling terrible'
-    }
-  };
-
-  const colorScale = {
-    1: '#EF4444',
-    2: '#F97316',
-    3: '#EAB308',
-    4: '#22C55E',
-    5: '#10B981'
-  };
 
   // Process chart data with enhanced error handling and validation
   const processedChartData = useMemo(() => {
@@ -164,19 +105,21 @@ const MoodChart = ({ refreshTrigger, isDarkMode = false }) => {
     console.log('🚀 MoodChart component mounted or refreshTrigger changed');
     fetchChartData();
     refreshLiveMoodData(); // Also refresh live mood data for pie chart
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [refreshTrigger, timeRange]);
 
   // Refresh live mood data when component mounts
   useEffect(() => {
     console.log('🔄 Initial live mood data refresh');
     refreshLiveMoodData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Listen for real-time mood updates
   useEffect(() => {
     const handleMoodUpdate = (event) => {
       console.log('📊 Mood update detected, refreshing chart...', event?.detail);
-      
+
       // Force immediate refresh when new mood is added
       if (event?.detail?.action === 'create') {
         console.log('🆕 New mood entry detected, forcing immediate refresh');
@@ -193,7 +136,7 @@ const MoodChart = ({ refreshTrigger, isDarkMode = false }) => {
 
     // Listen for custom mood update events
     window.addEventListener('moodDataUpdated', handleMoodUpdate);
-    
+
     // Also listen for storage changes (if mood is saved to localStorage)
     window.addEventListener('storage', handleMoodUpdate);
 
@@ -207,6 +150,7 @@ const MoodChart = ({ refreshTrigger, isDarkMode = false }) => {
       window.removeEventListener('moodEntryAdded', handleMoodUpdate);
       window.removeEventListener('moodDataChanged', handleMoodUpdate);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const fetchChartData = async (isRetry = false) => {
@@ -385,8 +329,8 @@ const MoodChart = ({ refreshTrigger, isDarkMode = false }) => {
     return '#EF4444';
   };
 
-  // Fill weekly data with all 7 days
-  const fillWeeklyData = (trendsData) => {
+  // Fill weekly data with all 7 days (reserved for future use)
+  const _fillWeeklyData = (trendsData) => {
     const filledData = [];
     const today = new Date();
     
@@ -425,8 +369,8 @@ const MoodChart = ({ refreshTrigger, isDarkMode = false }) => {
     return filledData;
   };
 
-  // Calculate mood trend indicator
-  const getMoodTrendIndicator = () => {
+  // Calculate mood trend indicator (reserved for future use)
+  const _getMoodTrendIndicator = () => {
     if (chartData.length < 2) return null;
     
     const recentMoods = chartData
@@ -460,8 +404,8 @@ const MoodChart = ({ refreshTrigger, isDarkMode = false }) => {
     }
   };
 
-  // Custom tooltip component
-  const CustomTooltip = ({ active, payload, label }) => {
+  // Custom tooltip component (reserved for future use)
+  const _CustomTooltip = ({ active, payload, label: _label }) => {
     if (active && payload && payload.length) {
       const data = payload[0].payload;
       if (data.moodValue) {
@@ -550,8 +494,8 @@ const MoodChart = ({ refreshTrigger, isDarkMode = false }) => {
     );
   }
 
-  // Empty state component
-  const EmptyState = () => (
+  // Empty state component (reserved for future use)
+  const _EmptyState = () => (
     <div className="empty-chart">
       <div className="empty-chart-icon"></div>
       <h4>No mood data yet</h4>

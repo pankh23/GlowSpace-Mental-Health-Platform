@@ -39,7 +39,7 @@ const CommunitySidebar = ({ onCommunitySelect, onCreateCommunity, refreshTrigger
       const TOKEN_KEY = btoa('glow_access_token');
       const REFRESH_KEY = btoa('glow_refresh_token');
       const accessToken = localStorage.getItem(TOKEN_KEY);
-      const refreshToken = localStorage.getItem(REFRESH_KEY);
+      const _refreshToken = localStorage.getItem(REFRESH_KEY);
       
       if (!accessToken) {
         throw new Error('No access token available');

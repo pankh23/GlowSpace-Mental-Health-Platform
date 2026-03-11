@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
 import AssessmentHub from '../components/Assessment-Archive/AssessmentHub';
 import ComprehensiveAssessmentFlow from '../components/Assessment-Archive/ComprehensiveAssessmentFlow';
 import ComprehensiveAssessmentResults from '../components/Assessment-Archive/ComprehensiveAssessmentResults';
@@ -16,7 +15,6 @@ const Assessments = () => {
   const [error, setError] = useState(null);
   
   const { apiRequest } = useAuth();
-  const navigate = useNavigate();
 
   const handleStartAssessment = async (assessmentType) => {
     setLoading(true);

@@ -116,7 +116,7 @@ class FrameBuffer {
 }
 
 const EmotionDetector = () => {
-  const { user } = useAuth();
+  useAuth();
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
   
@@ -140,18 +140,21 @@ const EmotionDetector = () => {
 
   // Load face-api models
   useEffect(() => {
+    const reqMgr = requestManager.current;
+    const buf = frameBuffer.current;
+
     const loadModels = async () => {
       try {
         setError(null);
         // Set the models path
         const modelsPath = `${process.env.PUBLIC_URL}/models`;
-        
+
         // Load models with proper paths
         await Promise.all([
           faceapi.nets.tinyFaceDetector.loadFromUri(modelsPath),
           faceapi.nets.faceExpressionNet.loadFromUri(modelsPath)
         ]);
-        
+
         console.log('Models loaded successfully');
         setIsModelLoaded(true);
       } catch (err) {
@@ -161,23 +164,23 @@ const EmotionDetector = () => {
     };
 
     loadModels();
-    
-    // Cleanup function
+
+    // Cleanup function - use refs captured at effect start
     return () => {
       // Stop detection if running
       if (window.emotionDetectionInterval) {
         clearInterval(window.emotionDetectionInterval);
       }
-      
+
       // Destroy any existing charts
       const chartInstance = ChartJS.getChart("emotion-chart");
       if (chartInstance) {
         chartInstance.destroy();
       }
-      
+
       // Reset managers
-      requestManager.current.reset();
-      frameBuffer.current.reset();
+      if (reqMgr) reqMgr.reset();
+      if (buf) buf.reset();
     };
   }, []);
 
@@ -309,7 +312,7 @@ const EmotionDetector = () => {
       setError('Error processing video frame');
       console.error('Frame processing error:', err);
     }
-  }, [isModelLoaded, sessionId, sendEmotionData]);
+  }, [isModelLoaded, sessionId, sendEmotionData, error]);
 
   // Calculate wellness score
   const calculateWellnessScore = (emotions) => {

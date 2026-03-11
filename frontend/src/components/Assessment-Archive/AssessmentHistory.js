@@ -9,7 +9,7 @@ const AssessmentHistory = () => {
   const [error, setError] = useState('');
   const [timeRange, setTimeRange] = useState('3months');
   const [chartData, setChartData] = useState(null);
-  const { token } = useAuth();
+  useAuth();
 
   const assessmentTypeNames = {
     comprehensive: 'Comprehensive Mental Health Assessment',

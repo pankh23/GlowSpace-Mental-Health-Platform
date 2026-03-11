@@ -31,7 +31,7 @@ const MoodInsights = ({ refreshTrigger }) => {
       }
 
       const summary = analytics.summary || {};
-      const trends = Array.isArray(analytics.trends) ? analytics.trends : [];
+      const _trends = Array.isArray(analytics.trends) ? analytics.trends : [];
       const streaks = analytics.streaks || {};
       const consistency = analytics.consistency || {};
       const weeklyChange = analytics.weeklyChange || {};

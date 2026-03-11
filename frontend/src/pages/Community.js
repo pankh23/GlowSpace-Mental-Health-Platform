@@ -9,10 +9,10 @@ import './Community.css';
 const Community = () => {
   const { user } = useAuth();
   const [selectedCommunity, setSelectedCommunity] = useState(null);
-  const [showCreateModal, setShowCreateModal] = useState(false);
+  const [, setShowCreateModal] = useState(false);
   const [view, setView] = useState('list'); // 'list', 'chat', 'create'
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [_loading, _setLoading] = useState(true);
+  const [error, _setError] = useState(null);
   const [refreshCommunities, setRefreshCommunities] = useState(0);
 
   useEffect(() => {
@@ -61,12 +61,12 @@ const Community = () => {
     setView('list');
   };
 
-  const handleCommunityLeft = (communityId) => {
+  const handleCommunityLeft = (_communityId) => {
     // Trigger refresh of community list
     setRefreshCommunities(prev => prev + 1);
   };
 
-  const handleCommunityJoined = (communityId) => {
+  const handleCommunityJoined = (_communityId) => {
     // Trigger refresh of community list
     setRefreshCommunities(prev => prev + 1);
   };

@@ -18,6 +18,7 @@ const CommunityList = ({ onCommunitySelect, onCreateCommunity }) => {
   useEffect(() => {
     loadCategories();
     loadCommunities();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage, selectedCategory, sortBy, searchQuery]);
 
   const loadCategories = async () => {

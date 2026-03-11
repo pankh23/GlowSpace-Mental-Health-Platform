@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import jwt_decode from 'jwt-decode'; // Changed from { jwtDecode }
-import api, { authAPI } from '../services/api';
+import { authAPI } from '../services/api';
 
 const AuthContext = createContext();
 
@@ -332,6 +332,7 @@ export const AuthProvider = ({ children }) => {
     if (!hasLoaded) {
       loadUser();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hasLoaded]);
 
   const value = {

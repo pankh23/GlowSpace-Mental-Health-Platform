@@ -5,7 +5,7 @@ import './HeroSection.css';
 
 const HeroSection = () => {
   const { user } = useAuth();
-  const [isVisible, setIsVisible] = useState(false);
+  const [, setIsVisible] = useState(false);
 
   useEffect(() => {
     setIsVisible(true);
