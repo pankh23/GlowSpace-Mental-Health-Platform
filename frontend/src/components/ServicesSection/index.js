@@ -16,7 +16,7 @@ const services = [
   {
     id: 'mood-tracking',
     title: 'Smart Mood Tracking',
-    description: 'Intelligent mood monitoring with AI-powered insights, helping you understand patterns and triggers in your emotional wellbeing.',
+    description: 'Smart mood tracking via analytics and rule based guidance to help you understand your mood patterns and triggers.',
     icon: '',
     color: '#9F7AEA',
     gradient: 'linear-gradient(135deg, #9F7AEA 0%, #805AD5 100%)',
@@ -43,16 +43,7 @@ const services = [
     features: ['Clinical tools', 'Personalized reports', 'Action plans', 'Progress tracking'],
     link: '/assessments'
   },
-  {
-    id: 'ai-chatbot',
-    title: 'AI Wellness Assistant',
-    description: '24/7 intelligent chatbot providing immediate support, guidance, and resources for your mental health journey.',
-    icon: '',
-    color: '#9F7AEA',
-    gradient: 'linear-gradient(135deg, #9F7AEA 0%, #2C7A7B 100%)',
-    features: ['24/7 availability', 'Instant responses', 'Resource library', 'Crisis support'],
-    link: '/chat'
-  },
+  
   {
     id: 'progress-analytics',
     title: 'Progress Analytics',
